@@ -33,7 +33,7 @@ def tc_sc(foo):
     coverage
 
     >>> tc_sc(foo)
-    3
+    2
     """
 
     # get number of input parameters (=conditions)
@@ -115,12 +115,6 @@ def is_cc(test_cases):
         else:
             cc.append(False)      
     return all(cc)
-
-
-
-if __name__ == "__main__":
-    import doctest
-    doctest.testmod()
 
 
     
