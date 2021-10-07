@@ -1,22 +1,36 @@
-name: Python Package using Conda
+name: Python package
 
 on: [push]
 
 jobs:
-  build-linux:
-    runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 5
+  build:
 
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python 3.8
+    - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8
-    - name: Add conda to system path
+        python-version: '3.x'
+    - name: Install dependencies
       run: |
-        # $CONDA is an environment variable pointing to the root of the miniconda directory
-        echo $CONDA/bin >> $GITHUB_PATH
-    - name: Test with doctest
-      run: python mcdc.py
+        python -m pip install --upgrade pip
+    - name: Test with pytest
+      run: |
+        pip install pytest
+        pip install pytest-cov
+        pytest mcdc.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
+    - name: Upload pytest test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: pytest-results-${{ matrix.python-version }}
+        path: junit/test-results${{ matrix.python-version }}.xml
+      # Use always() to always run this step to publish test results when there are test failures
+      if: ${{ always() }}
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()    # run this step even if previous step failed
+      with:
+        name: Junit Tests            # Name of the check run which will be created
+        path: junit/test-results${{ matrix.python-version }}.xml    # Path to test results
+        reporter: java-junit        # Format of test results
