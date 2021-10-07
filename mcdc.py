@@ -11,7 +11,9 @@ for a program that has n binary input conditions
 
 def foo(B,C):
     """ example function consists of one if statement A,
-    conditions B,C and decision D """
+    conditions B,C and decision D 
+    for this program to work we need a friendly function that is able to return the number of statements and decisions that were called 
+    """
     
     if B and C:
         A=True
