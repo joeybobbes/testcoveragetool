@@ -33,7 +33,7 @@ def tc_sc(foo):
     coverage
 
     >>> tc_sc(foo)
-    2
+    3
     """
 
     # get number of input parameters (=conditions)
