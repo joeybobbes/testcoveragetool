@@ -10,10 +10,19 @@ calculate number of required test cases for different coverage criteria
 for a program that has n binary input conditions
 """
 
-def foo(*conditions):
+# def foo(*conditions):
+#     """ example function inputs conditions and returns decision D """
+    
+#     if all(conditions):
+#         D=True
+#     else:
+#         D=False
+#     return D
+
+def foo(A,B):
     """ example function inputs conditions and returns decision D """
     
-    if all(conditions):
+    if A and B:
         D=True
     else:
         D=False
@@ -76,7 +85,8 @@ def tc_mcdc(foo):
     # create list with all subsets that satisfy cc and their length
     satisfies_mcdc=[]
     for subset in allsubsets:
-        if is_mcdc(subset,foo):
+        #print(subset)
+        if is_mc(subset,foo) and is_cc(subset) and is_dc(subset,foo):
             satisfies_mcdc.append((subset,len(subset)))
     satisfies_mcdc.sort(key=lambda x: x[1])
     return satisfies_mcdc[0][1]
@@ -86,10 +96,10 @@ import itertools
 def tc_gen(n):
     """ n is the number of conditions
 
-    >>> len(tc_gen(2))
-    4
+    >>> tc_gen(2)
+    [[True, True], [True, False], [False, True], [False, False]]
     """
-    comb = itertools.product([True,False], repeat=n) 
+    comb = (list(tuple) for tuple in itertools.product([True,False], repeat=n))
     return list(comb)
 
 from itertools import chain, combinations
@@ -142,25 +152,49 @@ def is_cc(test_cases):
             cc.append(False)      
     return all(cc)
 
-def is_mcdc(test_cases, foo):
+def is_dc(test_cases,foo):
+    """
+    return true if set of test cases satisfies decision coverage criteria
+    
+    >>> is_dc(([True, False],),foo)
+    False
+    >>> is_dc(([True, False], [True, True]),foo)
+    True
+    """
+    
+    was_true=False
+    was_false=False
+    if len(test_cases)==1:
+        return False
+    else:    
+        for test_case in test_cases:
+            if foo(*test_case) == True:
+                was_true=True
+            if foo(*test_case) == False:
+                was_false=True
+        return was_true and was_false
+
+def is_mc(test_cases, foo):
     """ 
     return true if set of test cases satisfies modified decision condition 
     coverage criteria 
 
-    >>> is_mcdc(([True,True],[False,True],[True,False]), foo)
+    >>> is_mc(([True,True],[False,True],[True,False]), foo)
     True
-    >>> is_mcdc(([False,False],[False,True],[True,False]), foo)
+    >>> is_mc(([False,False],[False,True],[True,False]), foo)
+    False
+    >>> is_mc(([True, False], [False, True]), foo)
     True
     """
     
-    mcdc=[]
+    mc=[]
     for test_case in test_cases:
         mod_test_cases=modify(test_case)
         changed_decision=[]
         for mod_test_case in mod_test_cases:
             changed_decision.append(foo(*test_case)!=foo(*mod_test_case))
-        mcdc.append(any(changed_decision))
-    return all(mcdc)
+        mc.append(any(changed_decision))
+    return all(mc)
 
 def modify(test_case):
     """ return iterable of modifications 
@@ -172,10 +206,13 @@ def modify(test_case):
     >>> modify([True, False])
     [[False, False], [True, True]]
     """
+    #test_case=list(test_case)
+    #print(test_case)
     n=len(test_case)
     mod_test_cases=[]
     for i in range(n):
         mod_test_case=test_case[:]
+        #print(mod_test_case[i])
         mod_test_case[i]= not mod_test_case[i]
         mod_test_cases.append(mod_test_case)
     return mod_test_cases
@@ -183,6 +220,7 @@ def modify(test_case):
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
+    tc_mcdc(foo)
 
 
     
