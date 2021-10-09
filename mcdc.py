@@ -80,7 +80,7 @@ def tc_mcdc(foo):
         if is_mc(subset,foo) and is_cc(subset) and is_dc(subset,foo):
             satisfies_mcdc.append((subset,len(subset)))
     satisfies_mcdc.sort(key=lambda x: x[1])
-    return satisfies_mcdc[0]
+    return satisfies_mcdc[0][1]
 
 import itertools
 
@@ -165,6 +165,45 @@ def is_dc(test_cases,foo):
                 was_false=True
         return was_true and was_false
 
+# def is_mc(test_cases, foo):
+#     """ 
+#     return true if set of test cases satisfies modified decision condition 
+#     coverage criteria. each condition needs to independently affect the outcome of the decision
+
+#     >>> is_mc(([True,True],[False,True],[True,False]), foo = lambda A,B: A and B)
+#     True
+#     >>> is_mc(([False,False],[False,True],[True,False]), foo = lambda A,B: A and B)
+#     True
+#     >>> is_mc(([True, True], [False, False]), foo = lambda A,B: A and B)
+#     False
+#     >>> is_mc(([True, True, True], [False, False, False]), foo = lambda A,B,C: A and (B or C))
+#     0
+#     """
+    
+#     mc=[]
+#     changed_decision=[]
+#     for test_case in test_cases:
+#         mod_test_cases=modify(test_case)
+        
+#         for (mod_test_case,i) in mod_test_cases:
+#             changed_decision.append((foo(*test_case)!=foo(*mod_test_case),i))
+#     print(changed_decision)
+    
+#     n=len(test_cases[0])
+#     did_affect=False
+#     for condition in range(n):
+#         did_affect=0
+#         for i_tc in range(len(changed_decision)):
+#             #print(i_tc)
+#             if condition == changed_decision[i_tc][1]:
+#                 did_affect=changed_decision[i_tc][0]
+#             if did_affect:
+#                 break
+#         mc.append(did_affect)
+#     #print(mc)
+#     return all(mc)
+
+
 def is_mc(test_cases, foo):
     """ 
     return true if set of test cases satisfies modified decision condition 
@@ -173,35 +212,51 @@ def is_mc(test_cases, foo):
     >>> is_mc(([True,True],[False,True],[True,False]), foo = lambda A,B: A and B)
     True
     >>> is_mc(([False,False],[False,True],[True,False]), foo = lambda A,B: A and B)
-    True
+    False
     >>> is_mc(([True, True], [False, False]), foo = lambda A,B: A and B)
     False
     >>> is_mc(([True, True, True], [False, False, False]), foo = lambda A,B,C: A and (B or C))
-    0
+    False
     """
+    # conditions that independently affected the outcome
     
-    mc=[]
-    changed_decision=[]
-    for test_case in test_cases:
-        mod_test_cases=modify(test_case)
-        
-        for (mod_test_case,i) in mod_test_cases:
-            changed_decision.append((foo(*test_case)!=foo(*mod_test_case),i))
-    print(changed_decision)
+    n=len(test_cases[0])    
+    # all possible pairs of test cases
+    c_aff=[]
+    for subset in combinations(test_cases,2):
+        (changed,which)=onlyonechanged(subset)
+        if changed:
+            if foo(*subset[0])!=foo(*subset[1]):
+                c_aff.append(which)         
+    return n==len(c_aff)
+
+def onlyonechanged(pair):
+    """
+    given a pair of test cases ([a,b],[c,d]), return if exactly one item changed
     
-    n=len(test_cases[0])
-    did_affect=False
-    for condition in range(n):
-        did_affect=0
-        for i_tc in range(len(changed_decision)):
-            #print(i_tc)
-            if condition == changed_decision[i_tc][1]:
-                did_affect=changed_decision[i_tc][0]
-            if did_affect:
-                break
-        mc.append(did_affect)
-    #print(mc)
-    return all(mc)
+    >>> onlyonechanged(([True, True], [False, False]))
+    (False, 0)
+    >>> onlyonechanged(([True, False], [False, False]))
+    (True, 0)
+    >>> onlyonechanged(([True, False, True], [False, False, False]))
+    (False, 0)
+    >>> onlyonechanged(([True, False, True], [True, True, True]))
+    (True, 1)
+
+    """
+
+    l1 = pair[0]
+    l2 = pair[1]
+    res = [ x != y for (x,y) in zip(l1, l2)]
+
+    if sum(res)==1:
+        ret_res=(sum(res)==1)
+        ret_pos=[i for i, e in enumerate(res) if e != 0]
+    else :
+        ret_res=False
+        ret_pos=[0]
+    
+    return ret_res, ret_pos[0]
 
 def modify(test_case):
     """ return iterable of modifications and modified index
@@ -227,7 +282,7 @@ def modify(test_case):
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
-    #print(tc_mcdc(foo))
+    print(tc_mcdc(foo))
 
 
     
