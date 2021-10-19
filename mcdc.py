@@ -60,7 +60,7 @@ def tc_mcdc(foo):
     coverage
 
     >>> tc_mcdc(foo = lambda A,B: A and B)
-    3
+    ([True, True], [True, False], [False, True])
     """
 
     # get number of input parameters (=conditions)
