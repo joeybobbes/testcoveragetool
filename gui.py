@@ -14,7 +14,7 @@ Website: zetcode.com
 import sys
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (QWidget, QLabel,
-        QLineEdit, QApplication)
+        QLineEdit, QApplication, QTextEdit, QPushButton, QVBoxLayout)
 
 import mcdc
 
@@ -23,39 +23,32 @@ class Example(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.initUI()
-
-
-    def initUI(self):
-
-        self.lbl = QLabel(self)
-        qle = QLineEdit(self)
-
-        qle.move(60, 100)
-        self.lbl.move(60, 40)
-
-        qle.textChanged[str].connect(self.onChanged)
-
-        self.setGeometry(300, 300, 350, 250)
-        self.setWindowTitle('QLineEdit')
-        self.show()
-
-
-    def onChanged(self, text):
+        self.setWindowTitle('MCDC Tool')
         
-        self.text = text
+        # create objects
+        self.textEdit = QTextEdit(self)
+        self.btnPress = QPushButton("Calculate MCDC")
 
-    def keyPressEvent(self, e):
+        # orient objects
         
-        if e.key() == 16777220:
-            print('enter entered')
+        layout = QVBoxLayout()
+        layout.addWidget(self.textEdit)
+        layout.addWidget(self.btnPress)
+        self.setLayout(layout)
+        
+        # connect to functions
+        self.btnPress.clicked.connect(self.btnPress_Clicked)
+    
 
-            self.foo = eval(self.text)
-            self.lbl.setText(str(mcdc.tc_mcdc(self.foo)))
-            self.lbl.adjustSize()
+    def btnPress_Clicked(self):
+
+        self.foo = eval(self.textEdit.toPlainText())
+        print(str(mcdc.tc_mcdc(self.foo)))
+
 
 if __name__ == '__main__':
 
     app = QApplication(sys.argv)
     ex = Example()
+    ex.show()
     sys.exit(app.exec())
