@@ -80,7 +80,7 @@ def tc_mcdc(foo):
         if is_mc(subset,foo) and is_cc(subset) and is_dc(subset,foo):
             satisfies_mcdc.append((subset,len(subset)))
     satisfies_mcdc.sort(key=lambda x: x[1])
-    return satisfies_mcdc[0][1]
+    return satisfies_mcdc[0][0]
 
 import itertools
 
