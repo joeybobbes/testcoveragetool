@@ -240,7 +240,7 @@ def modify(test_case):
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
-    #print(tc_mcdc(foo))
+    print(tc_mcdc(foo))
 
 
     
