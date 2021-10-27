@@ -52,6 +52,6 @@ jobs:
         cache-dependency-path: # optional
         # Deprecated. Use node-version instead. Will not be supported after October 1, 2019
         node-version: # optional
-      run: npm run
+        run: npm run
     
     
