@@ -11,8 +11,8 @@ jobs:
   setup_nodejs:
     runs-on: ubuntu-latest
     steps:
-    - name: npm init
-      run: npm init -y
+    - name: npm install
+      run: npm install
     - name: run npm 
       run: npm i danger
     - name: run danger
