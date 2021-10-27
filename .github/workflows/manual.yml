@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2.1.0
-    - name: npm init
-      run: npm init -y
+    - name: npm install
+      run: npm install
     - name: run npm 
       run: npm i danger
     - name: run danger
