@@ -16,7 +16,13 @@ jobs:
       run: npm install
     - name: run npm 
       run: npm i danger
+    - name: Danger JS
+      uses: danger/danger-js@X.Y.Z
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: run danger
       run: npm run danger
+
+
     
     
