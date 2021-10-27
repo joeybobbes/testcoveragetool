@@ -51,6 +51,7 @@ jobs:
         # Used to specify the path to a dependency file: package-lock.json, yarn.lock, etc. Supports wildcards or a list of file names for caching multiple dependencies.
         cache-dependency-path: # optional
         # Deprecated. Use node-version instead. Will not be supported after October 1, 2019
-        version: # optional
+        node-version: # optional
+      run: npm run
     
     
