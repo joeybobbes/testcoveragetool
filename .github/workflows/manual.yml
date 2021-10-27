@@ -11,6 +11,7 @@ jobs:
   setup_nodejs:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2.1.0
     - name: npm init
       run: npm init -y
     - name: run npm 
