@@ -17,6 +17,6 @@ jobs:
     - name: run npm 
       run: npm i danger
     - name: run danger
-      run: npm run
+      run: npm run danger
     
     
