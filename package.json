@@ -4,7 +4,8 @@
   "description": "tool that calculates minimal number of required test cases for a given function to satisfy different coverage criteria",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "danger": "danger ci"
   },
   "repository": {
     "type": "git",
