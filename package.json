@@ -1,8 +1,20 @@
 {
-  "name": "my-awesome-package",
+  "name": "testcoveragetool",
   "version": "1.0.0",
+  "description": "tool that calculates minimal number of required test cases for a given function to satisfy different coverage criteria",
+  "main": "index.js",
   "scripts": {
-    "test": "node test.js"
-    "danger": "danger ci"
-  }
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joeybobbes/testcoveragetool.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joeybobbes/testcoveragetool/issues"
+  },
+  "homepage": "https://github.com/joeybobbes/testcoveragetool#readme"
 }
