@@ -13,14 +13,11 @@ Website: zetcode.com
 
 from inspect import signature
 import sys
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import (QWidget, QLabel,
-        QLineEdit, QApplication, QTextEdit, QPushButton, QVBoxLayout)
 
-from PyQt6.QtWidgets import QApplication, \
-    QWidget, QTableWidget, QVBoxLayout, QTableWidgetItem
-from PyQt6.QtGui import QIcon, QFont
-import sys
+from PyQt5.QtWidgets import (QWidget, QApplication, QTextEdit, QPushButton, QVBoxLayout)
+
+from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem
+from PyQt5.QtGui import QFont
  
 import mcdc
 
