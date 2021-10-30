@@ -27,9 +27,8 @@ jobs:
         pip install build
         pip install pyinstaller
     - name: Build package
-      run: |
-      	python -m pyinstaller gui.py
-      	python -m build
+      run: python -m pyinstaller gui.py
+#      	python -m build
 #    - name: Publish package
 #      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
 #      with:
