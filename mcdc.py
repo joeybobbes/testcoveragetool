@@ -60,7 +60,7 @@ def tc_mcdc(foo):
     coverage
 
     >>> tc_mcdc(foo = lambda A,B: A and B)
-    3
+    ([True, True], [True, False], [False, True])
     """
 
     # get number of input parameters (=conditions)
@@ -80,7 +80,7 @@ def tc_mcdc(foo):
         if is_mc(subset,foo) and is_cc(subset) and is_dc(subset,foo):
             satisfies_mcdc.append((subset,len(subset)))
     satisfies_mcdc.sort(key=lambda x: x[1])
-    return satisfies_mcdc[0][1]
+    return satisfies_mcdc[0][0]
 
 import itertools
 
@@ -240,7 +240,7 @@ def modify(test_case):
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
-    #print(tc_mcdc(foo))
+    print(tc_mcdc(foo))
 
 
     
