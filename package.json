@@ -1,5 +1,5 @@
 {
-  "name": "testcoveragetool",
+  "name": "@joeybobbes/testcoveragetool",
   "version": "1.0.0",
   "description": "tool that calculates minimal number of required test cases for a given function to satisfy different coverage criteria",
   "main": "index.js",
@@ -22,5 +22,6 @@
   "homepage": "https://github.com/joeybobbes/testcoveragetool#readme",
   "dependencies": {
     "danger": "^10.7.0"
-  }
+  },
+  "devDependencies": {}
 }
