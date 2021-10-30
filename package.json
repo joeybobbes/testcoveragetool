@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "danger": "danger ci"
+    "danger": "danger ci",
+    "dangerlocal": "danger local",
+    "dangerpr": "danger pr"
   },
   "repository": {
     "type": "git",
@@ -17,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/joeybobbes/testcoveragetool/issues"
   },
-  "homepage": "https://github.com/joeybobbes/testcoveragetool#readme"
+  "homepage": "https://github.com/joeybobbes/testcoveragetool#readme",
+  "dependencies": {
+    "danger": "^10.7.0"
+  }
 }
