@@ -21,6 +21,10 @@
   },
   "homepage": "https://github.com/joeybobbes/testcoveragetool#readme",
   "dependencies": {
-    "danger": "^10.7.0"
+    "danger": "^10.7.0",
+    "testcoveragetool_joeybobbes": "^1.0.2"
+  },
+  "release": {
+  	"branches": ["main"]
   }
 }
