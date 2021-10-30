@@ -28,8 +28,23 @@ jobs:
         pip install pyinstaller
     - name: Create executable
       run: pyinstaller gui.py
-    - name: Build package
-      run: python -m build
+      
+      
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+#    - name: Build package
+#      run: python -m build
 #      	python -m build
 #    - name: Publish package
 #      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
