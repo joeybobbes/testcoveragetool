@@ -25,6 +25,9 @@
     "testcoveragetool_joeybobbes": "^1.0.2"
   },
   "release": {
-  	"branches": ["main"]
-  }
+    "branches": [
+      "main"
+    ]
+  },
+  "devDependencies": {}
 }
