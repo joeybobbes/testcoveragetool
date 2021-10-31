@@ -1,6 +1,6 @@
 {
   "name": "testcoveragetool_joeybobbes",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "tool that calculates minimal number of required test cases for a given function to satisfy different coverage criteria",
   "main": "index.js",
   "scripts": {
