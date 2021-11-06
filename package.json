@@ -1,13 +1,14 @@
 {
   "name": "testcoveragetool_joeybobbes",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "tool that calculates minimal number of required test cases for a given function to satisfy different coverage criteria",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "danger": "danger ci",
     "dangerlocal": "danger local",
-    "dangerpr": "danger pr"
+    "dangerpr": "danger pr",
+    "create:npmrc" : "node ./scripts/create-npmrc.js"
   },
   "repository": {
     "type": "git",
